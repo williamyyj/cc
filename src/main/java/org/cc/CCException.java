@@ -10,17 +10,4 @@ package org.cc;
  */
 public class CCException extends Exception {
 	
-	public CCException(String message) {
-        super(message);
-    }
-
-  
-    public CCException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-  
-    public CCException(Throwable cause) {
-        super(cause);
-    }
 }

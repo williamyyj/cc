@@ -1,137 +1,276 @@
 package org.cc.util;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 
-/**
- * Created with IntelliJ IDEA.
- * User: william
- * Date: 2013/7/2
- * Time: 下午 2:09
- * To change this template use File | Settings | File Templates.
- */
-public class CCBuffer implements Serializable, CharSequence {
+public class CCBuffer extends CCBufferBase {
 
+	public static final char QUOT = '"';
+	/**
+	 * The pattern *
+	 */
+	public final static String idPattern = " :()[]{}\\\"'";
+	public final static String valuePattern = ",)]}>";
+	public final static String wordPattern = " ,)]}>";
+	public final static String opPattern = " ,)]}$";
+	public final static String tk_lstr_start = "$\"";  // $".....""..."
+	protected SimpleDateFormat long_date_fmt = new SimpleDateFormat("yyyyMMddHHmmss");
+	protected SimpleDateFormat short_date_fmt = new SimpleDateFormat("yyyyMMdd");
 
-    protected char[] data;
-    protected String enc = "UTF-8";
-    protected int ps = 0;
-    protected int start = 0;
-    protected int line = 1;
-    protected int pos = 0;
-    protected char ch = 0;
-    protected File src;
+	public CCBuffer(String text) {
+		super(text);
+		tk_init();
+	}
 
-    public CCBuffer(char[] data) {
-        this.data = data;
-    }
+	public CCBuffer(File f, String enc) {
+		super(f,enc);
+		tk_init();
+	}
 
-    public CCBuffer(String text) {
-        data = text.toCharArray();
-    }
+	
 
-    public CCBuffer(File f, String enc) {
-        try {
-            this.src = f;
-            loadFromFile(f, enc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public char next() {
+		//m$,linux,osx
+		// \r\n,\n,\r
+		ps++;
+        ch = (ps < data.length) ? data[ps] : 0 ;
+		return ch;
+	}
 
-    public void loadFromFile(String fName) {
-        try {
-            loadFromFile(new File(fName), enc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	protected char next(int offset) {
+		ps += offset;
+		if (ps < data.length) {
+			if (ch == 10 || ch == 13) {
+				line++;
+				pos = 0;
+			}
+			ch = data[ps];
+			if ((ch == 13) && data[ps + 1] == 10) {
+				ps++;
+			}
+			pos += offset;
+		} else {
+			ch = 0;
+		}
+		return ch;
+	}
 
-    public void loadFromFile(File f, String enc) throws Exception {
-        data = null;
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), enc));
-        char[] tmp = new char[8192];
-        int num = 0;
-        try {
-            while ((num = br.read(tmp)) > 0) {
-                if (data == null) {
-                    data = new char[num];
-                    System.arraycopy(tmp, 0, data, 0, num);
+	// ".........................""...........""..........."
+	public String tk_lstring() {
+		StringBuffer sb = new StringBuffer();
+		if (tk_m(tk_lstr_start)) {
+			for (;;) {
+				if (ch == 0) {
+					break;
+				}
+				if (ch == QUOT ) {
+                    if(m(1,QUOT)){
+						sb.append(QUOT);
+						next();
+                    } else {
+                        break ;
+                    }
                 } else {
-                    char[] old = data;
-                    data = new char[old.length + num];
-                    System.arraycopy(old, 0, data, 0, old.length);
-                    System.arraycopy(tmp, 0, data, old.length, num);
-                }
-            }
-        } finally {
-            br.close();
-        }
-    }
+					sb.append(ch);
+				}
+				next();
+			}
+			next();
+		}
+		return sb.toString();
+	}
 
-    public int length() {
-        return data.length;
-    }
+	public String tk_string(char quote) {
+		StringBuffer sb = new StringBuffer();
+		while (next() != quote) {
+			switch (ch) {
+				case 0:
+					break;
+				case '\\':
+					next();
+					switch (ch) {
+						case 'b':
+							sb.append('\b');
+							break;
+						case 't':
+							sb.append('\t');
+							break;
+						case 'n':
+							sb.append('\n');
+							break;
+						case 'f':
+							sb.append('\f');
+							break;
+						case 'r':
+							sb.append('\r');
+							break;
+						case 'u':
+							sb.append((char) Integer.parseInt(subString(ps + 1, ps + 5), 16));
+							ps += 4;
+							pos += 4;
+							break;
+						case '"':
+						case '\'':
+						case '\\':
+							sb.append(ch);
+							break;
+					}
+					break;
+				default:
+					sb.append(ch);
+			}
+		}
+		if (!m(quote)) {
+			syntax_error("String exception [',\'] ");
+		}
+		next();
+		return sb.toString();
+	}
 
-    public char charAt(int index) {
-        return data[index];
-    }
+	public boolean tk_m(char c) {
+		if (m(c)) {
+			next();
+			return true;
+		}
+		return false;
+	}
 
-    public CharSequence subSequence(int start, int end) {
-        int size = end - start;
-        char[] buf = new char[size];
-        System.arraycopy(data, start, buf, 0, size);
-        return new CCBuffer(buf);
-    }
+	public boolean tk_m(String str) {
+		if (m(str)) {
+			next(str.length());
+			return true;
+		}
+		return false;
+	}
 
-    public String subString(int start, int end) {
-        return new String(data, start, end - start);
-    }
+	public boolean m(char c) {
+		return (ch == c);
+	}
 
-    public String subString(int start) {
-        return new String(data, start, data.length - start);
-    }
+	public boolean m(int idx, char c) {
+		return ((ps + idx) < data.length && c == data[ps + idx]);
+	}
 
-    protected void tk_init() {
-        ps = -1;
-        line = 1;
-        pos = 0;
-    }
+	public boolean m(String text) {
+		return m(ps, text);
+	}
+
+	public boolean mi(String text) {
+		return mi(ps, text);
+	}
+
+	public boolean m(int idx, String text) {
+		char[] buf = text.toCharArray();
+		for (char c : buf) {
+			if ((idx >= data.length || c != data[idx++])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean mi(int idx, String text) {
+		char[] buf = text.toCharArray();
+		for (char c : buf) {
+			if (idx >= data.length) {
+				return false;
+			}
+			char a = Character.toLowerCase(c);
+			char b = Character.toLowerCase(data[idx++]);
+			if (a != b) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean in(int idx, String text) {
+		return (text.indexOf(data[ps + idx]) >= 0);
+	}
 
 
-    protected char next() {
-        //m$,linux,osx
-        // \r\n,\n,\r
-        ps++;
-        if (ps < data.length) {
-            if (ch == 10 || ch == 13) {
-                line++;
-                pos = 0;
-            }
-            ch = data[ps];
-            if ((ch == 13) && data[ps + 1] == 10) {
-                ps++;
-            }
-            pos++;
-        } else {
-            ch = 0;
-        }
-        return ch;
-    }
 
-    @Override
-    public String toString() {
-        String fmt = "[%s,pos(%s,%s),%s]";
-        if (ch == 9) {
-            return String.format(fmt, ps, line, pos, "\\t");
-        } else if (ch == 10 || ch == 13) {
-            return String.format(fmt, ps, line, pos,  "\\n");
-        } else if (ch == 0) {
-            return String.format(fmt, ps, line, pos,  "$eof");
-        } else if (ch == 32) {
-            return String.format(fmt, ps, line, pos,  "\\s");
-        } else {
-            return String.format(fmt, ps, line, pos,  ch);
-        }
-    }
+	@SuppressWarnings("empty-statement")
+	public void tk_csp() {
+		while (isWhiteSpace() || m("/*")) {
+			if (isWhiteSpace()) {
+				while (next() == 9 || ch == 10 || ch == 13 || ch == 32) {
+				};
+			} else if (m("/*")) {
+				tk_comment();
+			}
+		}
+	}
 
+	public void tk_comment() {
+		if (tk_m("/*")) {
+			while (!m("*/") && ch != 0) {
+				next();
+			}
+			if (ch != 0) {
+				tk_m("*/");
+			}
+		}
+	}
+
+	public boolean isWhiteSpace() {
+		return (ch == 9 || ch == 10 || ch == 13 || ch == 32);
+	}
+
+	public Exception syntax_error(String message) {
+		String base = (src == null) ? this.toString() : src.getName() + "::::" + this.toString();
+		log.debug(message + ", in  " + base);
+		return new Exception(message + ", in  " + base);
+	}
+
+	public String tk_item(String pattern) {
+		start = ps;
+		while (!in(0, pattern)) {
+			next();
+		}
+		//if(pattern.indexOf(ch)<0) next(-1);
+		String text = subString(start, ps).trim();
+		return text;
+	}
+
+	public Object tk_value(String s) {
+		if (s.equals("")) {
+			return "";
+		}
+		if (s.equalsIgnoreCase("true")) {
+			return Boolean.TRUE;
+		}
+		if (s.equalsIgnoreCase("false")) {
+			return Boolean.FALSE;
+		}
+		if (s.equalsIgnoreCase("null")) {
+			return null;
+		}
+		char b = s.charAt(0);
+		if ((b >= '0' && b <= '9') || b == '.' || b == '-' || b == '+') {
+			if (b == '0' && s.length() > 2
+					&& (s.charAt(1) == 'x' || s.charAt(1) == 'X')) {
+				try {
+					return Integer.parseInt(s.substring(2), 16);
+				} catch (Exception ignore) {
+				}
+			}
+			try {
+				if (s.indexOf('.') > -1 || s.indexOf('e') > -1
+						|| s.indexOf('E') > -1) {
+					return Double.parseDouble(s);
+				} else {
+					Long myLong = new Long(s);
+					if (myLong.longValue() == myLong.intValue()) {
+						return myLong.intValue();
+					} else {
+						return myLong.longValue();
+					}
+				}
+			} catch (Exception ignore) {
+			}
+		}
+		return s.trim();
+	}
+	
 }

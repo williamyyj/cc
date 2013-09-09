@@ -8,6 +8,7 @@ package org.cc;
  * To change this template use File | Settings | File Templates.
  */
 public interface ICCResource {
+    public void init();
     public void open();
     public void close();
 }

@@ -1,6 +1,8 @@
 package org.cc;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -12,6 +14,33 @@ import java.util.Date;
  */
 public class CCList extends ArrayList<Object> implements ICCList {
 
+    protected boolean isIndent = true;
+
+    public CCList() {
+
+    }
+
+    public CCList(boolean isIndent) {
+        this.isIndent = isIndent;
+    }
+
+    public CCList(Object array) {
+        super();
+        if (array.getClass().isArray()) {
+            int length = Array.getLength(array);
+            for (int i = 0; i < length; i += 1) {
+                add(Array.get(array, i));
+            }
+        } else {
+            throw new RuntimeException(
+                    "JSONArray initial value should be a string or collection or array.");
+        }
+    }
+
+    public CCList(Collection c) {
+        super(c);
+    }
+
 
     @Override
     public void set(Object value) {
@@ -20,42 +49,42 @@ public class CCList extends ArrayList<Object> implements ICCList {
 
     @Override
     public Number num(Integer id) {
-        return CC.num(this,id);
+        return CC.num(this, id);
     }
 
     @Override
     public Number num(Integer id, Number dv) {
-        return CC.num(this,id,dv);
+        return CC.num(this, id, dv);
     }
 
     @Override
     public String str(Integer id) {
-        return CC.str(this,id) ;
+        return CC.str(this, id);
     }
 
     @Override
     public String str(Integer id, String dv) {
-        return CC.str(this,id,dv);
+        return CC.str(this, id, dv);
     }
 
     @Override
     public Date date(Integer id) {
-        return CC.date(this,id);
+        return CC.date(this, id);
     }
 
     @Override
     public Date date(Integer id, Date dv) {
-        return CC.date(this,id,dv);
+        return CC.date(this, id, dv);
     }
 
     @Override
     public boolean bool(Integer id) {
-        return CC.bool(this,id);
+        return CC.bool(this, id);
     }
 
     @Override
     public boolean bool(Integer id, boolean dv) {
-        return CC.bool(this,id,dv);
+        return CC.bool(this, id, dv);
     }
 
     @Override
@@ -66,13 +95,13 @@ public class CCList extends ArrayList<Object> implements ICCList {
     @Override
     public ICCList list(Integer id) {
         Object o = get(id);
-        return (o instanceof ICCList) ? (ICCList) o : null ;
+        return (o instanceof ICCList) ? (ICCList) o : null;
     }
 
     @Override
     public ICCMap map(Integer id) {
         Object o = get(id);
-        return (o instanceof ICCMap) ? (ICCMap) o : null ;
+        return (o instanceof ICCMap) ? (ICCMap) o : null;
     }
 
     @Override
@@ -82,12 +111,12 @@ public class CCList extends ArrayList<Object> implements ICCList {
 
     @Override
     public boolean has(Integer id) {
-        return (0<=id && id<size());
+        return (0 <= id && id < size());
     }
 
     @Override
     public Object set(Integer id, Object value) {
-        return this.set(id,value);
+        return this.set(id, value);
     }
 
     @Override
@@ -97,30 +126,47 @@ public class CCList extends ArrayList<Object> implements ICCList {
 
     @Override
     public String json() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+
+        for (Object item : this) {
+            sb.append(CC.json(item));
+        }
+        if (size() > 0) {
+            sb.setLength(sb.length() - 1);
+        }
+        sb.append(']');
+        return sb.toString();
     }
 
-	public int asInt(Integer id) {
-		return CC.asInt(this, id);
-	}
 
-	public int asInt(Integer id, int dv) {
-		return CC.asInt(this, id,dv);	
-	}
+    public String json(String indent) {
+        return json(null, indent);
+    }
 
-	public long asLong(Integer id) {
-		return CC.asLong(this, id);	
-	}
+    public String json(String base, String indent) {
+        if (!isIndent) {
+            return json();
+        }
+        StringBuilder sb = new StringBuilder();
+        String next = (base == null) ? indent : base + indent;
+        sb.append("[\n");
+        for (int i = 0; i < size(); i++) {
+            CC.indent(sb, next, CC.json(get(i), next, indent));
+            sb.append(",\n");
+        }
+        if (size() > 0) {
+            sb.setLength(sb.length() - 2);
+        }
+        sb.append('\n');
+        CC.indent(sb, base, "]");
+        return sb.toString();
+    }
 
-	public long asLong(Integer id, long dv) {
-		return CC.asLong(this, id, dv);	
-	}
+    @Override
+    public void setIsIndent(boolean isIndent) {
+        this.isIndent = isIndent;
+    }
 
-	public double asDouble(Integer id) {
-		return CC.asDouble(this, id);	
-	}
 
-	public double asDouble(Integer id, double dv) {
-		return CC.asDouble(this, id, dv);	
-	}
 }

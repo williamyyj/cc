@@ -8,6 +8,6 @@ package org.cc;
  * To change this template use File | Settings | File Templates.
  */
 public interface ICCFmt<E> {
-    public E parser(String text) ;
-    public String format(E value);
+    public E strToObj(String text) ;
+    public String objToStr(E value);
 }

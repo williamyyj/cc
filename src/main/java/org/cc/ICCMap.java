@@ -8,5 +8,7 @@ package org.cc;
  * To change this template use File | Settings | File Templates.
  */
 public interface ICCMap extends ICC<String> {
-    public Object[] toArray(String ... name);
+    public Object[] toArray(String... names);
+    public Object attr(String id);
+    public Object attr(String id, Object dv);
 }
