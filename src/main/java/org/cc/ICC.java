@@ -13,6 +13,12 @@ import java.util.Date;
 public interface ICC<E> {
     public Number num(E id);
     public Number num(E id, Number dv);
+	public int asInt(E id);
+    public int asInt(E id, int dv);
+	public long asLong(E id);
+    public long asLong(E id, long dv);
+	public double asDouble(E id);
+    public double asDouble(E id, double dv);
     public String str(E id);
     public String str(E id, String dv);
     public Date date(E id);

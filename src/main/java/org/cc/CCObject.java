@@ -100,4 +100,28 @@ public class CCObject extends HashMap<String,Object> implements ICCMap {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+	public int asInt(String id) {
+		return CC.asInt(this, id);
+	}
+
+	public int asInt(String id, int dv) {
+		return CC.asInt(this, id, dv);
+	}
+
+	public long asLong(String id) {
+		return CC.asLong(this, id);
+	}
+
+	public long asLong(String id, long dv) {
+		return CC.asLong(this, id, dv);
+	}
+
+	public double asDouble(String id) {
+		return CC.asDouble(this, id);
+	}
+
+	public double asDouble(String id, double dv) {
+		return CC.asDouble(this,id,dv);
+	}
+
 }

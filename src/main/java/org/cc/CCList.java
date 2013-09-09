@@ -99,4 +99,28 @@ public class CCList extends ArrayList<Object> implements ICCList {
     public String json() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+	public int asInt(Integer id) {
+		return CC.asInt(this, id);
+	}
+
+	public int asInt(Integer id, int dv) {
+		return CC.asInt(this, id,dv);	
+	}
+
+	public long asLong(Integer id) {
+		return CC.asLong(this, id);	
+	}
+
+	public long asLong(Integer id, long dv) {
+		return CC.asLong(this, id, dv);	
+	}
+
+	public double asDouble(Integer id) {
+		return CC.asDouble(this, id);	
+	}
+
+	public double asDouble(Integer id, double dv) {
+		return CC.asDouble(this, id, dv);	
+	}
 }

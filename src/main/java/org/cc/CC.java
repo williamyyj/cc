@@ -46,5 +46,32 @@ public class CC {
         Object o = cc.obj(id);
         return (o instanceof Date) ? (Date) o : dv ;
     }
+	
+    public static <E> int asInt(ICC<E> cc , E id) {
+        return asInt(cc,id,0);
+    }
+
+    public static <E> int asInt(ICC<E> cc , E id , int dv) {
+        Object o = cc.obj(id);
+        return (o instanceof Number) ? ((Number)o).intValue() : dv ;
+    }
+	
+	public static <E> long asLong(ICC<E> cc , E id) {
+        return asLong(cc,id,0L);
+    }
+
+    public static <E> long asLong(ICC<E> cc , E id , long dv) {
+        Object o = cc.obj(id);
+        return (o instanceof Number) ? ((Number)o).longValue() : dv ;
+    }
+	
+	public static <E> double asDouble(ICC<E> cc , E id) {
+        return asDouble(cc,id,0.0);
+    }
+
+    public static <E> double asDouble(ICC<E> cc , E id , double dv) {
+        Object o = cc.obj(id);
+        return (o instanceof Number) ? ((Number)o).doubleValue() : dv ;
+    }
 
 }
