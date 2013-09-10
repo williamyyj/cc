@@ -24,17 +24,17 @@ public interface ICCType<E> {
     public final static String dt_clob = "clob";
     public final static String dt_array = "array";
     public final static String dt_object = "object";
-    public final static String fmt_datetime = "yyyy-MM-dd HH-mm-ss";
+    public final static String fmt_datetime = "yyyy-MM-dd HH:mm:ss";
     public final static String fmt_date = "yyyy-MM-dd";
 
     public String dt();
+	public Class<?> nativeClass();
+    public int dt_sql();
     public E value(Object o);
     public E value(Object o, E dv);
     public E getRS(ResultSet rs, String name) throws SQLException ; 
     public void setPS(PreparedStatement ps, int idx, Object value) throws SQLException ;
     public String json_value(Object value);
-    public Class<?> nativeClass();
-    public int dt_sql();
     public String sql_value(Object value);
 
 }
