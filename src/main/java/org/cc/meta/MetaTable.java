@@ -46,11 +46,11 @@ public class MetaTable {
     }
 
     public ICCType type(ICCMap column) {
-        return types.type(column.num("dt_sql"));
+        return types.type(column.asInt("dt_sql"));
     }
 
     public String table() {
-        return (not_null()) ? tb_meta.str("table") : null;
+        return (not_null()) ? tb_meta.asString("table") : null;
     }
 
     public ICCMap indexOf(String name) {

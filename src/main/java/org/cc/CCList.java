@@ -48,42 +48,32 @@ public class CCList extends ArrayList<Object> implements ICCList {
     }
 
     @Override
-    public Number num(Integer id) {
-        return CC.num(this, id);
-    }
-
-    @Override
-    public Number num(Integer id, Number dv) {
-        return CC.num(this, id, dv);
-    }
-
-    @Override
-    public String str(Integer id) {
+    public String asString(Integer id) {
         return CC.str(this, id);
     }
 
     @Override
-    public String str(Integer id, String dv) {
+    public String asString(Integer id, String dv) {
         return CC.str(this, id, dv);
     }
 
     @Override
-    public Date date(Integer id) {
+    public Date asDate(Integer id) {
         return CC.date(this, id);
     }
 
     @Override
-    public Date date(Integer id, Date dv) {
+    public Date asDate(Integer id, Date dv) {
         return CC.date(this, id, dv);
     }
 
     @Override
-    public boolean bool(Integer id) {
+    public boolean asBoolean(Integer id) {
         return CC.bool(this, id);
     }
 
     @Override
-    public boolean bool(Integer id, boolean dv) {
+    public boolean asBoolean(Integer id, boolean dv) {
         return CC.bool(this, id, dv);
     }
 
@@ -167,6 +157,31 @@ public class CCList extends ArrayList<Object> implements ICCList {
     public void setIsIndent(boolean isIndent) {
         this.isIndent = isIndent;
     }
+
+	public int asInt(Integer id) {
+		return CC.asInt(this, id);
+	}
+
+	public int asInt(Integer id, int dv) {
+		return CC.asInt(this, id, dv);
+	}
+
+	public long asLong(Integer id) {
+		return CC.asLong(this, id);	
+	}
+	
+
+	public long asLong(Integer id, int dv) {
+		return CC.asLong(this, id, dv);
+	}
+
+	public double asDouble(Integer id) {
+		return CC.asDouble(this, id);
+	}
+
+	public double asDouble(Integer id, int dv) {
+		return CC.asDouble(this, id, dv);
+	}
 
 
 }

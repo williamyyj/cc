@@ -26,7 +26,7 @@ public class SQLFInsert extends SQLFBase  {
         int idx = 0;
         for (int i=0; i<len ; i++) {
             ICCMap col = mt.cols(i);
-            String col_name = col.str("name");
+            String col_name = col.asString("name");
             ICCType type = mt.type(col);
             if ( !is_null(row,col_name)) {
                 sb.append(col_name).append(',');
@@ -39,7 +39,7 @@ public class SQLFInsert extends SQLFBase  {
         sb.append(" values (");
         for (int i=0; i<len ; i++) {
             ICCMap col = mt.cols(i);
-            String col_name = col.str("name");
+            String col_name = col.asString("name");
             if ( !is_null(row,col_name)) {
                 ICCType<?> dt =  mt.type(col);
                 String value = dt.sql_value(row.obj(col_name));

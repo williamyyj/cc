@@ -25,7 +25,7 @@ public class WorkCCEL {
 		CCEL el = new CCEL("prj/mvel/ht", "mvel");
 		String table = "CardApplyView";
 		String alias = "CardApply";
-		String path = cfg.str("path_mapper");
+		String path = cfg.asString("path_mapper");
 		el.set_out(new PrintWriter(System.out));
 		ICCMap m = new CCObject();
 		m.set("pkg_mapper", cfg.obj("pkg_mapper"));

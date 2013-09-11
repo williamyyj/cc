@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,42 +55,32 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
     }
 
     @Override
-    public Number num(String id) {
-        return CC.num(this,id);
-    }
-
-    @Override
-    public Number num(String id, Number dv) {
-        return CC.num(this,id,dv);
-    }
-
-    @Override
-    public String str(String id) {
+    public String asString(String id) {
         return CC.str(this, id);
     }
 
     @Override
-    public String str(String id, String dv) {
+    public String asString(String id, String dv) {
         return CC.str(this,id,dv);
     }
 
     @Override
-    public Date date(String id) {
+    public Date asDate(String id) {
         return CC.date(this, id);
     }
 
     @Override
-    public Date date(String id, Date dv) {
+    public Date asDate(String id, Date dv) {
         return CC.date(this,id,dv);
     }
 
     @Override
-    public boolean bool(String id) {
+    public boolean asBoolean(String id) {
         return CC.bool(this,id);
     }
 
     @Override
-    public boolean bool(String id, boolean dv) {
+    public boolean asBoolean(String id, boolean dv) {
         return CC.bool(this,id,dv);
     }
 
@@ -178,6 +167,30 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
     public void setIsIndent(boolean isIndent) {
         this.isIndent = isIndent;
     }
+
+	public int asInt(String id) {
+		return CC.asInt(this, id) ;
+	}
+
+	public int asInt(String id, int dv) {
+		return CC.asInt(this, id, dv);
+	}
+
+	public long asLong(String id) {
+		return CC.asLong(this, id);
+	}
+
+	public long asLong(String id, int dv) {
+		return CC.asLong(this, id, dv);
+	}
+
+	public double asDouble(String id) {
+		return CC.asDouble(this, id) ;
+	}
+
+	public double asDouble(String id, int dv) {
+		return CC.asDouble(this, id, dv);
+	}
 
 
 }

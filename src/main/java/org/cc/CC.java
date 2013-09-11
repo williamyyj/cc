@@ -23,14 +23,34 @@ public class CC {
 
     private static Pattern p = Pattern.compile("\\$\\{([^\\}]+)\\}");
 
-    public static <E> Number num(ICC<E> cc , E id) {
-        return num(cc,id,0);
+    public static <E> int asInt(ICC<E> cc , E id) {
+        return asInt(cc,id,0);
     }
 
-    public static <E> Number num(ICC<E> cc , E id , Number dv) {
+    public static <E> int asInt(ICC<E> cc , E id , int dv) {
         Object o = cc.obj(id);
-        return (o instanceof Number) ? (Number) o : dv ;
+        return (o instanceof Number) ? ((Number) o).intValue() : dv ;
     }
+	
+	    public static <E> long asLong(ICC<E> cc , E id) {
+        return asLong(cc,id,0L);
+    }
+
+    public static <E> long asLong(ICC<E> cc , E id , long dv) {
+        Object o = cc.obj(id);
+        return (o instanceof Number) ? ((Number) o).longValue() : dv ;
+    }
+
+	
+	public static <E> double asDouble(ICC<E> cc , E id) {
+        return asDouble(cc,id,0.0);
+    }
+
+    public static <E> double asDouble(ICC<E> cc , E id , double dv) {
+        Object o = cc.obj(id);
+        return (o instanceof Number) ? ((Number) o).doubleValue() : dv ;
+    }
+
 
     public static <E> String str(ICC<E> cc , E id ) {
         return str(cc,id,"");
@@ -257,7 +277,7 @@ public class CC {
             StringBuffer sb = new StringBuffer();
             Matcher m = p.matcher(text);
             while (m.find()) {
-                String re = mapping.str(m.group(1));
+                String re = mapping.asString(m.group(1));
                 re = (re == null) ? "" : re;
                 re = m.quoteReplacement(re);  //
                 m.appendReplacement(sb,re);

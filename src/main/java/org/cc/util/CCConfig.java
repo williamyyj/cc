@@ -52,7 +52,7 @@ public class CCConfig extends CCObject {
                 log.error("Can't find : " + base);
             }
         }
-        return this.str("$base");
+        return this.asString("$base");
     }
     
     public String base(){

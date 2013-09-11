@@ -30,7 +30,7 @@ public class DBFTableMeta implements IFunction<ICCMap, IDBSchema> {
         if (cols != null) {
             for (int i = 0; i < cols.len(); i++) {
                 ICCMap col = cols.map(i);
-                col.set("pk", pk(pks, col.str("name")));
+                col.set("pk", pk(pks, col.asString("name")));
             }
         }
         m.set("catalog", catalog);
