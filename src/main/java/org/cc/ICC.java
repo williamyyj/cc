@@ -11,18 +11,18 @@ import java.util.Date;
  *
  */
 public interface ICC<E> {
-	public int asInt(E id) ; 
-	public int asInt(E id , int dv);
-	public long asLong(E id) ; 
-	public long asLong(E id , int dv);
-	public double asDouble(E id) ; 
-	public double asDouble(E id , int dv);
-    public String asString(E id);
-    public String asString(E id, String dv);
-    public Date asDate(E id);
-    public Date asDate(E id, Date dv);
-    public boolean asBoolean(E id);
-    public boolean asBoolean(E id, boolean dv);
+	public int toI(E id); 
+	public int toI(E id , int dv);
+	public long toL(E id); 
+	public long toL(E id , int dv);
+	public double toF(E id); 
+	public double toF(E id , int dv);
+    public String str(E id);
+    public String str(E id, String dv);
+    public Date date(E id);
+    public Date date(E id, Date dv);
+    public boolean bool(E id);
+    public boolean bool(E id, boolean dv);
     public Object obj(E id);
     public ICCList list(E id);
     public ICCMap map(E id);
@@ -34,4 +34,5 @@ public interface ICC<E> {
     public String json(String indent);
     public String json(String base,String indent);
     public void setIsIndent(boolean isIndent);
+	public void disable_indent(E id);
 }

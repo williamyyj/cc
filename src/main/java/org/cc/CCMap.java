@@ -55,32 +55,32 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
     }
 
     @Override
-    public String asString(String id) {
+    public String str(String id) {
         return CC.str(this, id);
     }
 
     @Override
-    public String asString(String id, String dv) {
+    public String str(String id, String dv) {
         return CC.str(this,id,dv);
     }
 
     @Override
-    public Date asDate(String id) {
+    public Date date(String id) {
         return CC.date(this, id);
     }
 
     @Override
-    public Date asDate(String id, Date dv) {
+    public Date date(String id, Date dv) {
         return CC.date(this,id,dv);
     }
 
     @Override
-    public boolean asBoolean(String id) {
+    public boolean bool(String id) {
         return CC.bool(this,id);
     }
 
     @Override
-    public boolean asBoolean(String id, boolean dv) {
+    public boolean bool(String id, boolean dv) {
         return CC.bool(this,id,dv);
     }
 
@@ -168,31 +168,44 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
         this.isIndent = isIndent;
     }
 
-	public int asInt(String id) {
+	public int toI(String id) {
 		return CC.asInt(this, id) ;
 	}
 
-	public int asInt(String id, int dv) {
+	public int toI(String id, int dv) {
 		return CC.asInt(this, id, dv);
 	}
 
-	public long asLong(String id) {
+	public long toL(String id) {
 		return CC.asLong(this, id);
 	}
 
-	public long asLong(String id, int dv) {
+	public long toL(String id, int dv) {
 		return CC.asLong(this, id, dv);
 	}
 
-	public double asDouble(String id) {
+	public double toF(String id) {
 		return CC.asDouble(this, id) ;
 	}
 
-	public double asDouble(String id, int dv) {
+	public double toF(String id, int dv) {
 		return CC.asDouble(this, id, dv);
 	}
 	
 	public Map<String,Object> model(){
 		return this ; 
+	}
+	
+	public void disable_indent(String id) {
+		ICCList list = list(id);
+		if(list !=null){
+			int len = list.len();
+			for(int i=0; i<len ; i++){
+				Object o = list.obj(i);
+				if(o instanceof ICC){
+					((ICC)o).setIsIndent(false);
+				}
+			}
+		}
 	}
 }

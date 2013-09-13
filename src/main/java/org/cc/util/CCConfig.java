@@ -52,7 +52,7 @@ public class CCConfig extends CCObject {
                 log.error("Can't find : " + base);
             }
         }
-        return this.asString("$base");
+        return this.str("$base");
     }
     
     public String base(){
@@ -60,7 +60,7 @@ public class CCConfig extends CCObject {
     }
 
 	public String path(String prefix){
-		return base()+"/" + this.asString(prefix,"");
+		return base()+"/" + this.str(prefix,"");
 	}
 	
     public  void load(String id){

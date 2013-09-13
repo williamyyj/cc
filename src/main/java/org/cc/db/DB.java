@@ -47,9 +47,9 @@ public class DB implements IDB {
     public DB(CCConfig cfg){
         this.cfg = cfg ;
         res = cfg.map("db");
-        this.id = res.asString("id");
-        cc_types = new CCTypes(res.asString("database"));
-        path_meta = new File(CC.ref(cfg,res.asString("meta"),null));
+        this.id = res.str("id");
+        cc_types = new CCTypes(res.str("database"));
+        path_meta = new File(CC.ref(cfg,res.str("meta"),null));
         if(!path_meta.exists()){
             path_meta.mkdirs();
         }
@@ -100,10 +100,10 @@ public class DB implements IDB {
         if (old == null && res!=null) {
             try {            
                 PoolProperties p = new PoolProperties();
-                p.setUrl(res.asString("url"));
-                p.setDriverClassName(res.asString("driver"));
-                p.setUsername(res.asString("user"));
-                p.setPassword(res.asString("password"));
+                p.setUrl(res.str("url"));
+                p.setDriverClassName(res.str("driver"));
+                p.setUsername(res.str("user"));
+                p.setPassword(res.str("password"));
                 p.setJmxEnabled(true);
                 p.setTestWhileIdle(false);
                 p.setTestOnBorrow(true);
@@ -149,12 +149,12 @@ public class DB implements IDB {
     
     @Override
     public String catalog() {
-        return res.asString("catalog");
+        return res.str("catalog");
     }
     
     @Override
     public String schema() {
-        return res.asString("schema");
+        return res.str("schema");
     }
     
     @Override
@@ -164,12 +164,12 @@ public class DB implements IDB {
     
     @Override
     public String pkg() {
-        return res.asString("pkg");
+        return res.str("pkg");
     }
     
     @Override
     public String database() {
-        return res.asString("database");
+        return res.str("database");
     }
     
 
@@ -221,7 +221,7 @@ public class DB implements IDB {
     }
     
     public String path_data() {
-       String path = res.asString("data");
+       String path = res.str("data");
        return (path!=null) ? path : base()+"/data" ;
     }
 

@@ -215,7 +215,7 @@ public class CCEL implements ICCVM {
 	public void proc_bean(CCConfig cfg, DBSchema dm, String table, String alias) throws Exception {
 		long ts = System.nanoTime();
 		try {
-			String path = cfg.asString("path_bean");
+			String path = cfg.str("path_bean");
 			set_out(new File(path,alias+".java"));
 			ICCMap m = new CCObject();
 			m.set("pkg_mapper", cfg.obj("pkg_mapper"));
@@ -238,7 +238,7 @@ public class CCEL implements ICCVM {
 	public void proc_mapper(CCConfig cfg, DBSchema dm, String table , String alias) throws Exception {
 		long ts = System.nanoTime();
 		try {
-			String path = cfg.asString("path_mapper");
+			String path = cfg.str("path_mapper");
 			set_out(new File(path,alias+"Mapper.xml"));
 			ICCMap m = new CCObject();
 			m.set("pkg_mapper", cfg.obj("pkg_mapper"));

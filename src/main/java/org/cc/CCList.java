@@ -49,32 +49,32 @@ public class CCList extends ArrayList<Object> implements ICCList {
     }
 
     @Override
-    public String asString(Integer id) {
+    public String str(Integer id) {
         return CC.str(this, id);
     }
 
     @Override
-    public String asString(Integer id, String dv) {
+    public String str(Integer id, String dv) {
         return CC.str(this, id, dv);
     }
 
     @Override
-    public Date asDate(Integer id) {
+    public Date date(Integer id) {
         return CC.date(this, id);
     }
 
     @Override
-    public Date asDate(Integer id, Date dv) {
+    public Date date(Integer id, Date dv) {
         return CC.date(this, id, dv);
     }
 
     @Override
-    public boolean asBoolean(Integer id) {
+    public boolean bool(Integer id) {
         return CC.bool(this, id);
     }
 
     @Override
-    public boolean asBoolean(Integer id, boolean dv) {
+    public boolean bool(Integer id, boolean dv) {
         return CC.bool(this, id, dv);
     }
 
@@ -159,33 +159,46 @@ public class CCList extends ArrayList<Object> implements ICCList {
         this.isIndent = isIndent;
     }
 
-	public int asInt(Integer id) {
+	public int toI(Integer id) {
 		return CC.asInt(this, id);
 	}
 
-	public int asInt(Integer id, int dv) {
+	public int toI(Integer id, int dv) {
 		return CC.asInt(this, id, dv);
 	}
 
-	public long asLong(Integer id) {
+	public long toL(Integer id) {
 		return CC.asLong(this, id);	
 	}
 	
 
-	public long asLong(Integer id, int dv) {
+	public long toL(Integer id, int dv) {
 		return CC.asLong(this, id, dv);
 	}
 
-	public double asDouble(Integer id) {
+	public double toF(Integer id) {
 		return CC.asDouble(this, id);
 	}
 
-	public double asDouble(Integer id, int dv) {
+	public double toF(Integer id, int dv) {
 		return CC.asDouble(this, id, dv);
 	}
 	
 	public List<Object> model(){
 		return this ; 
+	}
+
+	public void disable_indent(Integer id) {
+		ICCList list = list(id);
+		if(list !=null){
+			int len = list.len();
+			for(int i=0; i<len ; i++){
+				Object o = list.obj(i);
+				if(o instanceof ICC){
+					((ICC)o).setIsIndent(false);
+				}
+			}
+		}
 	}
 
 

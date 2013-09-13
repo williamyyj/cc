@@ -22,7 +22,7 @@ public class CCUtils {
 				Object o = list.obj(i);
 				if (o instanceof ICCMap) {
 					ICCMap m = (ICCMap) o;
-					if (m.has(id) && m.asString(id).equalsIgnoreCase(value)) {
+					if (m.has(id) && m.str(id).equalsIgnoreCase(value)) {
 						return m;
 					}
 				}
@@ -38,7 +38,7 @@ public class CCUtils {
 				Object o = list.obj(i);
 				if (o instanceof ICCMap) {
 					ICCMap m = (ICCMap) o;
-					if (m.has(id) && m.asString(id).equalsIgnoreCase(value)) {
+					if (m.has(id) && m.str(id).equalsIgnoreCase(value)) {
 						return i;
 					}
 				}
@@ -52,7 +52,7 @@ public class CCUtils {
 		int len = ret.len();
 		for (int i = 0; i < list.len(); i++) {
 			ICCMap m = list.map(i);
-			if (m != null && in(names, m.asString(id))) {
+			if (m != null && in(names, m.str(id))) {
 				ret.set(m);
 			}
 		}
@@ -64,7 +64,7 @@ public class CCUtils {
 		int len = ret.len();
 		for (int i = 0; i < list.len(); i++) {
 			ICCMap m = list.map(i);
-			if (m != null && !in(names, m.asString(id))) {
+			if (m != null && !in(names, m.str(id))) {
 				ret.set(m);
 			}
 		}

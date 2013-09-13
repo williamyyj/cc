@@ -277,7 +277,7 @@ public class CC {
             StringBuffer sb = new StringBuffer();
             Matcher m = p.matcher(text);
             while (m.find()) {
-                String re = mapping.asString(m.group(1));
+                String re = mapping.str(m.group(1));
                 re = (re == null) ? "" : re;
                 re = m.quoteReplacement(re);  //
                 m.appendReplacement(sb,re);
