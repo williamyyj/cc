@@ -5,7 +5,7 @@
 package org.cc.tml;
 
 import java.util.Map;
-import org.cc.util.CCJSONParser;
+import org.cc.util.CCJsonParser;
 
 
 /**
@@ -15,7 +15,7 @@ import org.cc.util.CCJSONParser;
 
 public class CCELNPaser implements ICCEL {
 
-    protected CCJSONParser p ; 
+    protected CCJsonParser p ; 
     
     protected String express ; 
     

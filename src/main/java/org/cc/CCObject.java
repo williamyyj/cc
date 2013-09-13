@@ -12,15 +12,14 @@ import java.io.File;
 
 public class CCObject extends CCMap {
 
-    private long lastModified = 0  ;
-    private File src ;
-
     public CCObject(){
         super();
     }
-
+	
     public boolean isAttr(String id){
         return (id!=null && id.charAt(0)=='@');
     }
+	
+
 
 }

@@ -3,7 +3,7 @@ package org.cc.db;
 import org.cc.CCMap;
 import org.cc.ICCMap;
 import org.cc.fun.db.SQLFInsert;
-import org.cc.meta.MetaTable;
+import org.cc.meta.DBTableMeta;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class CSVImport {
         CSVImport ci = new CSVImport();
 
         try{
-            MetaTable mt = new MetaTable(meta,"Crop_T");
+            DBTableMeta mt = new DBTableMeta(meta,"Crop_T");
             List<ICCMap> rows = ci.to_map(new File("prj/baphiq/data/crop_t.csv"),"UTF-8");
             SQLFInsert fins = new SQLFInsert();
             for(ICCMap row : rows){

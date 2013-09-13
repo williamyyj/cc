@@ -13,14 +13,14 @@ import org.cc.type.ICCType;
  * Time: 下午 4:53
  * To change this template use File | Settings | File Templates.
  */
-public class MetaTable {
+public class DBTableMeta {
 
     private ICCMap tb_meta;
     private ICCList cols;
     private IDBSchema schema;
     private CCTypes types;
 
-    public MetaTable(IDBSchema schema, String table) {
+    public DBTableMeta(IDBSchema schema, String table) {
         this.schema = schema;
         try {
             types = schema.types();

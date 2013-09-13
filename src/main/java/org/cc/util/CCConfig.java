@@ -34,7 +34,7 @@ public class CCConfig extends CCObject {
     protected void init(){
 		File cfg_path = new File(base(),"cfg.json");
 		log.debug("===== cfg_path : "+cfg_path);
-        ICCMap m = new  CCJSONParser( cfg_path,"UTF-8").parser_obj();
+        ICCMap m = new  CCJsonParser( cfg_path,"UTF-8").parser_obj();
         if(m instanceof Map){
           this.putAll((Map<? extends String,?>) m);
         }
@@ -59,6 +59,10 @@ public class CCConfig extends CCObject {
         return base(null);
     }
 
+	public String path(String prefix){
+		return base()+"/" + this.asString(prefix,"");
+	}
+	
     public  void load(String id){
         ICCMap m = CC.load(new File(base(), id + ".json"),"UTF-8");
         if(m!=null){
@@ -83,5 +87,9 @@ public class CCConfig extends CCObject {
         throw new RuntimeException("Can't get ICCMap object : " + id);
     }
 
+	public File file(String prefix , String id ){
+		String path = path(prefix);
+		return new File(path,id+".json");
+	}
 
 }

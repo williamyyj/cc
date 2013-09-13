@@ -2,7 +2,7 @@ package org.cc.fun.db;
 
 
 import org.cc.ICCMap;
-import org.cc.meta.MetaTable;
+import org.cc.meta.DBTableMeta;
 import org.cc.type.ICCType;
 
 /**
@@ -16,7 +16,7 @@ public class SQLFInsert extends SQLFBase  {
 
 
     @Override
-    public String exec(MetaTable mt, Object... args) throws Exception {
+    public String exec(DBTableMeta mt, Object... args) throws Exception {
         ICCMap row = (ICCMap) args[0];
 
 

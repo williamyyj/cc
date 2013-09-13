@@ -1,5 +1,7 @@
 package org.cc;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: william
@@ -11,4 +13,5 @@ public interface ICCMap extends ICC<String> {
     public Object[] toArray(String... names);
     public Object attr(String id);
     public Object attr(String id, Object dv);
+	public Map<String,Object> model();
 }

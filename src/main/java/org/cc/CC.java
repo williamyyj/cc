@@ -229,7 +229,7 @@ public class CC {
     }
 
     public static ICCMap load(File f , String enc){
-        return CCCache.getMap(f,enc);
+        return CCCache.load_map(f,enc);
     }
 
     public static void save(File f, String enc, ICCMap m) throws IOException {

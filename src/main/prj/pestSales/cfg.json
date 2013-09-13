@@ -1,0 +1,8 @@
+{
+	"db": "db_test",
+	"pkg_mapper": "hyweb.gip.dao",
+	"pkg_bean": "hyweb.gip.pojo.mybatis.table" ,
+	"path_mapper" : "D:\\will\\work\\ebaphiq\\pestSales\\src\\hyweb\\gip\\dao" ,
+	"path_bean" : "D:\\will\\work\\ebaphiq\\pestSales\\src\\hyweb\\gip\\pojo\\mybatis\\table" ,
+	"path_meta_act" : "metadata"
+}

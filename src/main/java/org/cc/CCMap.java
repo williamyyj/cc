@@ -16,7 +16,7 @@ import java.util.Set;
 public class CCMap extends HashMap<String,Object> implements ICCMap {
 
     protected boolean isIndent = true ;
-
+	
     public CCMap(){
 
     }
@@ -191,6 +191,8 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
 	public double asDouble(String id, int dv) {
 		return CC.asDouble(this, id, dv);
 	}
-
-
+	
+	public Map<String,Object> model(){
+		return this ; 
+	}
 }

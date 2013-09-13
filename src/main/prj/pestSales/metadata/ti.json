@@ -1,0 +1,19 @@
+{
+	"@table" : "psTestItem" , 
+	
+	
+	"$batch_upload" : {
+
+		"$meta" : {
+			"@ret" : "list" ,
+			"@classId" : "meta",
+			"@flow" : [
+				{ "@act" : "load" , "id" : "pstestitem" } ,
+				{ "@act" : "include" , "params" : [] } 
+			],
+					
+		} , 
+		
+	}
+	
+}

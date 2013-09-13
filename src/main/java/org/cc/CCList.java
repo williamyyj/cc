@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -181,6 +182,10 @@ public class CCList extends ArrayList<Object> implements ICCList {
 
 	public double asDouble(Integer id, int dv) {
 		return CC.asDouble(this, id, dv);
+	}
+	
+	public List<Object> model(){
+		return this ; 
 	}
 
 

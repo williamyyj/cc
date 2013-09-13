@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class ms_date extends CCDateType {
 
+	@Override
     public String sql_value(Object value){
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");

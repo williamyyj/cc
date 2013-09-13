@@ -2,7 +2,7 @@ package org.cc.db;
 
 import org.cc.ICCMap;
 import org.cc.fun.db.SQLFInsert;
-import org.cc.meta.MetaTable;
+import org.cc.meta.DBTableMeta;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class DBExport {
         DBSchema meta = new DBSchema("prj/hycms");
         try{
             List<ICCMap> rows = meta.rows("select * from CodeMetaDef");
-            MetaTable mt = new MetaTable(meta,"CodeMetaDef");
+            DBTableMeta mt = new DBTableMeta(meta,"CodeMetaDef");
             SQLFInsert fins = new SQLFInsert();
             for(ICCMap row : rows){
                 String sql = fins.exec(mt,row) ;
