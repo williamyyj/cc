@@ -14,7 +14,16 @@ import org.cc.type.ICCType;
  */
 public class SQLFInsert extends SQLFBase  {
 
-
+	private String exclude ; 
+	
+	public SQLFInsert(){
+		
+	}
+	
+	public SQLFInsert(String exclude){
+		this.exclude = (exclude!=null) ? exclude.toLowerCase() : null ; 
+	}
+	
     @Override
     public String exec(DBTableMeta mt, Object... args) throws Exception {
         ICCMap row = (ICCMap) args[0];
@@ -28,7 +37,7 @@ public class SQLFInsert extends SQLFBase  {
             ICCMap col = mt.cols(i);
             String col_name = col.str("name");
             ICCType type = mt.type(col);
-            if ( !is_null(row,col_name)) {
+            if ( !is_null(row,col_name) && exclude(col)) {
                 sb.append(col_name).append(',');
                 idx++;
             }
@@ -51,7 +60,15 @@ public class SQLFInsert extends SQLFBase  {
         }
         return sb.toString();
     }
-
+	// Fix exclude 
+	public boolean exclude(ICCMap m){
+		String name = m.str("name").toLowerCase();
+		if(exclude !=null && exclude.indexOf(name)>=0){
+			return true ; 
+		}
+		return false ; 
+	}
+	
     // Fix isEmpty
     public boolean is_null(ICCMap jo, String var){
         if(jo.has(var)){
