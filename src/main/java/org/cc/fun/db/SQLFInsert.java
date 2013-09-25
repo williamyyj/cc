@@ -3,6 +3,7 @@ package org.cc.fun.db;
 
 import org.cc.ICCMap;
 import org.cc.meta.DBTableMeta;
+import org.cc.meta.ITableMeta;
 import org.cc.type.ICCType;
 
 /**
@@ -25,7 +26,7 @@ public class SQLFInsert extends SQLFBase  {
 	}
 	
     @Override
-    public String exec(DBTableMeta mt, Object... args) throws Exception {
+    public String exec(ITableMeta mt, Object... args) throws Exception {
         ICCMap row = (ICCMap) args[0];
 
 
@@ -34,10 +35,10 @@ public class SQLFInsert extends SQLFBase  {
         int len = mt.cols_len();
         int idx = 0;
         for (int i=0; i<len ; i++) {
-            ICCMap col = mt.cols(i);
+            ICCMap col = mt.column(i);
             String col_name = col.str("name");
             ICCType type = mt.type(col);
-            if ( !is_null(row,col_name) && exclude(col)) {
+            if ( !is_null(row,col_name) && !exclude(col)) {
                 sb.append(col_name).append(',');
                 idx++;
             }
@@ -47,9 +48,9 @@ public class SQLFInsert extends SQLFBase  {
         }
         sb.append(" values (");
         for (int i=0; i<len ; i++) {
-            ICCMap col = mt.cols(i);
+            ICCMap col = mt.column(i);
             String col_name = col.str("name");
-            if ( !is_null(row,col_name)) {
+            if ( !is_null(row,col_name) && !exclude(col) ) {
                 ICCType<?> dt =  mt.type(col);
                 String value = dt.sql_value(row.obj(col_name));
                 sb.append(value).append(',');

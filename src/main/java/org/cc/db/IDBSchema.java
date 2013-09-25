@@ -21,13 +21,11 @@ public interface IDBSchema extends IDB {
      public String[] pk(String table) throws Exception ; 
 
     public String[] indeies(String catalog, String schema, String table) throws Exception ;
+	
+	public void fk(String catalog, String schema, String table) throws Exception ; 
 
-    public ICCMap tb_meta(String catalog, String schema, String table) throws Exception ;
+    public ICCMap tbmd(String catalog, String schema, String table) throws Exception ;
 
-    public void fk(String catalog, String schema, String table) throws Exception ; 
-
-    public DatabaseMetaData db_meta() throws Exception;
-    
-
+    public DatabaseMetaData dbmd() throws Exception;
      
 }

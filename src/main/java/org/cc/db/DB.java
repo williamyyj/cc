@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import javax.sql.DataSource;
 
 import org.cc.CC;
@@ -16,6 +17,8 @@ import org.cc.ICCMap;
 import org.cc.IFunction;
 import org.cc.fun.db.DBFFillRow;
 import org.cc.fun.db.DBFLoadRows;
+import org.cc.meta.DBTableMeta;
+import org.cc.meta.ITableMeta;
 import org.cc.type.CCTypes;
 import org.cc.util.CCConfig;
 import xo.org.apache.tomcat.jdbc.pool.PoolProperties;
@@ -24,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class DB implements IDB {
-    
+	
     protected Logger log = LoggerFactory.getLogger(DB.class);
     protected CCConfig cfg;
     protected ICCMap res ;
@@ -207,7 +210,7 @@ public class DB implements IDB {
     }
 
 
-    public ICCMap load_tb_meta(String tb) throws Exception {
+    protected ICCMap load_tb_meta(String tb) throws Exception {
         String alias = CC.to_alias(tb);
         File f = new File(path_meta(),alias+".json");
         if(f.exists()){
@@ -215,6 +218,16 @@ public class DB implements IDB {
         }
         return null;
     }
+	
+	public ITableMeta tb_meta(String tb){
+		try {
+			ICCMap meta = load_tb_meta(tb);
+			return new DBTableMeta(meta,this.types());
+		} catch (Exception ex) {
+			java.util.logging.Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 
     public String path_meta() {
        return  path_meta.getAbsolutePath();

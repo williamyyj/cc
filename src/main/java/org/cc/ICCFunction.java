@@ -2,18 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.cc.fun.db;
+package org.cc;
 
 /**
  *
  * @author william
- * 利用Meta機制做DB異動
- * 
  */
-
-public class DBFAction  {
-	
-	public DBFAction(){
-		
-	}
+public interface ICCFunction<E> {
+	public E execute(Object ... params);
 }

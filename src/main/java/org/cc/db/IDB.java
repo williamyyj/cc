@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 import org.cc.ICCMap;
+import org.cc.meta.ITableMeta;
 import org.cc.type.CCTypes;
 
 
@@ -35,7 +36,7 @@ public interface IDB {
     public int action(ICCMap row) throws SQLException;
     public void close() throws Exception ; 
     public CCTypes types();
-    public ICCMap load_tb_meta(String tb) throws Exception ;
+	public ITableMeta tb_meta(String tb);
     public void __release(PreparedStatement ps, ResultSet rs) throws SQLException ;
     
 }

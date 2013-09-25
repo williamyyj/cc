@@ -6,11 +6,10 @@ package org.cc.fun.db;
 
 import org.cc.*;
 import org.cc.db.IDBSchema;
-import org.cc.meta.DBTableMeta;
 import org.cc.type.CCTypes;
-
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import org.cc.meta.ITableMeta;
 
 
 /**
@@ -34,8 +33,8 @@ public class DBFColMeta extends FunBase implements IFunction<ICCList, IDBSchema>
         String catalog = (String) args[0];
         String schema = (String) args[1];
         String table = (String) args[2];
-        DatabaseMetaData dbmd = dm.db_meta();
-        DBTableMeta mt = new  DBTableMeta(dm,table);
+        DatabaseMetaData dbmd = dm.dbmd();
+        ITableMeta mt = dm.tb_meta(table);
         ResultSet rs = null;
         try {
             rs = dbmd.getColumns(catalog, schema, table, null);
@@ -52,10 +51,10 @@ public class DBFColMeta extends FunBase implements IFunction<ICCList, IDBSchema>
 
 
 
-    public ICCMap get_meta(ResultSet rs, DBTableMeta mt) throws Exception {
-        // 改用SYS_MAP去決定型別
+    public ICCMap get_meta(ResultSet rs, ITableMeta mt) throws Exception {
+        // 考量使用SYS_MAP去決定型別
         String name =    rs.getString("COLUMN_NAME") ;
-        ICCMap info = mt.indexOf(name);
+        ICCMap info = mt.column(name);
         info = (info==null) ? new CCMap() : info ;
         info.setIsIndent(false);
         info.set("name", name);

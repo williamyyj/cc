@@ -1,73 +1,77 @@
 package org.cc.meta;
 
+import org.cc.CC;
 import org.cc.ICCList;
 import org.cc.ICCMap;
-import org.cc.db.IDBSchema;
 import org.cc.type.CCTypes;
 import org.cc.type.ICCType;
 
 /**
- * Created with IntelliJ IDEA.
- * User: william
- * Date: 2013/7/29
- * Time: 下午 4:53
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: william Date: 2013/7/29 Time: 下午 4:53 To change this template use File | Settings | File
+ * Templates.
  */
-public class DBTableMeta {
+public class DBTableMeta implements ITableMeta {
 
-    private ICCMap tb_meta;
-    private ICCList cols;
-    private IDBSchema schema;
-    private CCTypes types;
+	private ICCMap tb_meta;
+	private ICCList cols;
+	private CCTypes types;
 
-    public DBTableMeta(IDBSchema schema, String table) {
-        this.schema = schema;
-        try {
-            types = schema.types();
-            tb_meta = schema.load_tb_meta(table);
-            if (tb_meta != null) {
-                cols = tb_meta.list("column");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public DBTableMeta(ICCMap tb_meta, CCTypes types) {
+		this.types = types;
+		this.tb_meta = tb_meta;
+		this.cols = tb_meta.list("column");
+	}
 
-    public boolean not_null() {
-        return (tb_meta != null);
-    }
+	public boolean not_null() {
+		return (tb_meta != null);
+	}
 
-    public ICCMap cols(int idx) {
-        return (not_null()) ? cols.map(idx) : null;
-    }
+	public ICCMap column(int idx) {
+		return (not_null()) ? cols.map(idx) : null;
+	}
 
-    public int cols_len() {
-        return (not_null()) ? cols.len() : 0;
-    }
+	public ICCMap column(String name) {
+		if (not_null()) {
+			String alias = CC.to_alias(name);
+			for (int i = 0; i < cols.len(); i++) {
+				ICCMap col = cols.map(i);
+				if (name.equals(col.obj("alias"))) {
+					return col;
+				}
+			}
+		}
+		return null;
+	}
 
-    public ICCType type(ICCMap column) {
-        return types.type(column.toI("dt_sql"));
-    }
+	public int cols_len() {
+		return (not_null()) ? cols.len() : 0;
+	}
 
-    public String table() {
-        return (not_null()) ? tb_meta.str("table") : null;
-    }
+	public ICCType type(ICCMap column) {
+		return types.type(column.toI("dt_sql"));
+	}
 
-    public ICCMap indexOf(String name) {
-        if (not_null()) {
-            for (int i = 0; i < cols.len(); i++) {
-                ICCMap col = cols.map(i);
-                if (name.equals(col.obj("name"))) {
-                    return col;
-                }
-            }
-        }
-        return null;
-    }
+	public String table() {
+		return (not_null()) ? tb_meta.str("table") : null;
+	}
 
-    public String toString(){
-        return (this.tb_meta!=null) ?  tb_meta.json("\t") : super.toString();
-    }
+	public String toString() {
+		return (this.tb_meta != null) ? tb_meta.json("\t") : super.toString();
+	}
 
+	public String catalog() {
+		return (not_null()) ? tb_meta.str("catalog") : null;
+	}
 
+	public String schema() {
+		return (not_null()) ? tb_meta.str("schema") : null;
+	}
+
+	public ICCList cols() {
+		return (not_null()) ? cols : null;
+	}
+	
+	public ICCMap model(){
+		return (not_null()) ? tb_meta : null;
+	}
 }

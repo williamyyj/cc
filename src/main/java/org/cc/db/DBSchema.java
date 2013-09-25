@@ -36,27 +36,27 @@ public class DBSchema extends DB implements IDBSchema {
     }
 
     public String[] tables() throws Exception {
-        return fun_table.exec(db_meta(), catalog(), schema());
+        return fun_table.exec(dbmd(), catalog(), schema());
     }
 
     public String[] tables(String catalog, String schema) throws Exception {
-        return fun_table.exec(db_meta(), catalog, schema);
+        return fun_table.exec(dbmd(), catalog, schema);
     }
 
     public String[] columns(String table) throws Exception {
-        return fun_column.exec(db_meta(), catalog(), schema(), table);
+        return fun_column.exec(dbmd(), catalog(), schema(), table);
     }
 
     public String[] columns(String catalog, String schema, String table) throws Exception {
-        return fun_table.exec(db_meta(), catalog, schema, table);
+        return fun_table.exec(dbmd(), catalog, schema, table);
     }
 
     public String[] pk(String catalog, String schema, String table) throws Exception {
-        return fun_pk_meta.exec(db_meta(), catalog, schema, table);
+        return fun_pk_meta.exec(dbmd(), catalog, schema, table);
     }
 
     public String[] pk(String table) throws Exception {
-        return fun_pk_meta.exec(db_meta(), catalog(), schema(),table);
+        return fun_pk_meta.exec(dbmd(), catalog(), schema(),table);
     }
 
     public String[] indeies(String catalog, String schema, String table) throws Exception {
@@ -67,18 +67,14 @@ public class DBSchema extends DB implements IDBSchema {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public DatabaseMetaData db_meta() throws Exception {
+    public DatabaseMetaData dbmd() throws Exception {
         if(dbmd==null){
             dbmd = connection().getMetaData();
         }
         return dbmd;
     }
     
-    public ICCMap tb_meta(String table) throws Exception {
-        return fun_tab_meta.exec(this, catalog(), schema(), table);
-    }
-
-    public ICCMap tb_meta(String catalog, String schema, String table) throws Exception {
+    public ICCMap tbmd(String catalog, String schema, String table) throws Exception {
         return fun_tab_meta.exec(this, catalog, schema, table);
     }
 

@@ -12,6 +12,8 @@ import org.cc.CCCast;
 import org.cc.CCObject;
 import org.cc.ICCMap;
 import org.cc.db.DBSchema;
+import org.cc.db.IDBSchema;
+import org.cc.meta.ITableMeta;
 import org.cc.tml.CCELNode;
 import org.cc.tml.ICCEL;
 import org.cc.tml.ICCVM;
@@ -212,7 +214,7 @@ public class CCEL implements ICCVM {
 		return "===== ip:" + _ip;
 	}
 
-	public void proc_bean(CCConfig cfg, DBSchema dm, String table, String alias) throws Exception {
+	public void proc_bean(CCConfig cfg, IDBSchema dm, String table, String alias) throws Exception {
 		long ts = System.nanoTime();
 		try {
 			String path = cfg.str("path_bean");
@@ -221,7 +223,7 @@ public class CCEL implements ICCVM {
 			m.set("pkg_mapper", cfg.obj("pkg_mapper"));
 			m.set("pkg_bean", cfg.obj("pkg_bean"));
 			m.set("classId",alias);
-			ICCMap meta = dm.tb_meta(table);
+			ICCMap meta = dm.tb_meta(table).model();
 			System.out.println(meta.json());
 			m.set("meta", meta);
 			m.set("$cr", "\r\n");
@@ -235,7 +237,7 @@ public class CCEL implements ICCVM {
 		}
 	}
 
-	public void proc_mapper(CCConfig cfg, DBSchema dm, String table , String alias) throws Exception {
+	public void proc_mapper(CCConfig cfg, IDBSchema dm, String table , String alias) throws Exception {
 		long ts = System.nanoTime();
 		try {
 			String path = cfg.str("path_mapper");
@@ -244,8 +246,7 @@ public class CCEL implements ICCVM {
 			m.set("pkg_mapper", cfg.obj("pkg_mapper"));
 			m.set("pkg_bean", cfg.obj("pkg_bean"));
 			m.set("classId",alias);
-			ICCMap meta = dm.tb_meta(table);
-			System.out.println(meta.json());
+			ICCMap meta = dm.tb_meta(table).model();
 			m.set("meta", meta);
 			m.set("$cr", "\r\n");
 			exec("my/mapper", (Map) m);
@@ -262,7 +263,7 @@ public class CCEL implements ICCVM {
 		// D:\will\work\mcc\prj\baphiq\cfg.json
 		System.out.println("===== start ");
 		CCConfig cfg = new CCConfig("prj/baphiq");
-		DBSchema dm = new DBSchema(cfg);
+		IDBSchema dm = new DBSchema(cfg);
 		CCEL el = new CCEL("prj/mvel/ht", "mvel");
 		String table = "psTestResultView" ; 
 		String alias = "TestResult";

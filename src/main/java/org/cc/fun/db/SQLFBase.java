@@ -1,7 +1,7 @@
 package org.cc.fun.db;
 
 import org.cc.IFunction;
-import org.cc.meta.DBTableMeta;
+import org.cc.meta.ITableMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,18 +14,13 @@ import org.slf4j.LoggerFactory;
  * Time: 下午 4:30
  * To change this template use File | Settings | File Templates.
  */
-public class SQLFBase implements IFunction<String, DBTableMeta> {
+public class SQLFBase implements IFunction<String, ITableMeta> {
 
     protected static Logger log = LoggerFactory.getLogger(SQLFBase.class);
 
     @Override
-    public String exec(DBTableMeta mt, Object... args) throws Exception {
+    public String exec(ITableMeta mt, Object... args) throws Exception {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
-
-
-
-
-
 
 }
