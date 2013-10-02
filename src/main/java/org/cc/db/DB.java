@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import javax.sql.DataSource;
 
 import org.cc.CC;
@@ -17,8 +16,8 @@ import org.cc.ICCMap;
 import org.cc.IFunction;
 import org.cc.fun.db.DBFFillRow;
 import org.cc.fun.db.DBFLoadRows;
-import org.cc.meta.DBTableMeta;
-import org.cc.meta.ITableMeta;
+import org.cc.meta.DBTableMetadata;
+import org.cc.meta.ITableMetadata;
 import org.cc.type.CCTypes;
 import org.cc.util.CCConfig;
 import xo.org.apache.tomcat.jdbc.pool.PoolProperties;
@@ -219,12 +218,12 @@ public class DB implements IDB {
         return null;
     }
 	
-	public ITableMeta tb_meta(String tb){
+	public ITableMetadata tb_meta(String tb){
 		try {
 			ICCMap meta = load_tb_meta(tb);
-			return new DBTableMeta(meta,this.types());
+			return new DBTableMetadata(meta,this.types());
 		} catch (Exception ex) {
-			java.util.logging.Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		}
 		return null;
 	}

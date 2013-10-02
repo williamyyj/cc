@@ -13,7 +13,6 @@ import org.cc.CCObject;
 import org.cc.ICCMap;
 import org.cc.db.DBSchema;
 import org.cc.db.IDBSchema;
-import org.cc.meta.ITableMeta;
 import org.cc.tml.CCELNode;
 import org.cc.tml.ICCEL;
 import org.cc.tml.ICCVM;

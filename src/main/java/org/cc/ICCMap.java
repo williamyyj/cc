@@ -1,6 +1,7 @@
 package org.cc;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,4 +15,5 @@ public interface ICCMap extends ICC<String> {
     public Object attr(String id);
     public Object attr(String id, Object dv);
 	public Map<String,Object> model();
+	public Set<String> names();
 }

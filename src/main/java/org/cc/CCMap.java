@@ -208,4 +208,8 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
 			}
 		}
 	}
+
+	public Set<String> names() {
+		return this.keySet();
+	}
 }

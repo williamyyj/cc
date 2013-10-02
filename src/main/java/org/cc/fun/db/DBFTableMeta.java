@@ -24,7 +24,7 @@ public class DBFTableMeta implements IFunction<ICCMap, IDBSchema> {
         String table = (String) args[2];
         ICCMap m = new CCMap();
         DatabaseMetaData dbmd = dm.dbmd();
-        IFunction<ICCList, IDBSchema> fun_col_meta = new DBFColMeta(dm.types());
+        IFunction<ICCList, IDBSchema> fun_col_meta = new DBFColMeta();
         ICCList cols = fun_col_meta.exec(dm,catalog,schema,table);
         String[] pks = dm.pk(table);
         if (cols != null) {

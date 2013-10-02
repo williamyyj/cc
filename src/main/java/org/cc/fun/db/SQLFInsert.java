@@ -2,8 +2,8 @@ package org.cc.fun.db;
 
 
 import org.cc.ICCMap;
-import org.cc.meta.DBTableMeta;
-import org.cc.meta.ITableMeta;
+import org.cc.meta.DBTableMetadata;
+import org.cc.meta.ITableMetadata;
 import org.cc.type.ICCType;
 
 /**
@@ -26,18 +26,16 @@ public class SQLFInsert extends SQLFBase  {
 	}
 	
     @Override
-    public String exec(ITableMeta mt, Object... args) throws Exception {
+    public String exec(ITableMetadata md, Object... args) throws Exception {
         ICCMap row = (ICCMap) args[0];
-
-
         StringBuilder sb = new StringBuilder();
-        sb.append("insert into ").append(mt.table()).append(" (");
-        int len = mt.cols_len();
+        sb.append("insert into ").append(md.table()).append(" (");
+        int len = md.meta_len();
         int idx = 0;
         for (int i=0; i<len ; i++) {
-            ICCMap col = mt.column(i);
+            ICCMap col = md.meta(i);
             String col_name = col.str("name");
-            ICCType type = mt.type(col);
+            ICCType type = md.type(col);
             if ( !is_null(row,col_name) && !exclude(col)) {
                 sb.append(col_name).append(',');
                 idx++;
@@ -48,10 +46,10 @@ public class SQLFInsert extends SQLFBase  {
         }
         sb.append(" values (");
         for (int i=0; i<len ; i++) {
-            ICCMap col = mt.column(i);
+            ICCMap col = md.meta(i);
             String col_name = col.str("name");
             if ( !is_null(row,col_name) && !exclude(col) ) {
-                ICCType<?> dt =  mt.type(col);
+                ICCType<?> dt =  md.type(col);
                 String value = dt.sql_value(row.obj(col_name));
                 sb.append(value).append(',');
             }

@@ -252,21 +252,23 @@ public class CC {
             if (c == '.' || c == '-' || c == '_') {
                 continue;
             }
-            sb.append(Character.toLowerCase(c));
+            sb.append(c);
         }
         return sb.toString();
     }
 
     public static String to_short(String fid) {
-        String text1 = fid.toLowerCase();
-        String[] buf = text1.split("[\\.\\-\\_]");
+        char[] buf = fid.toLowerCase().toCharArray();
         StringBuilder sb = new StringBuilder();
-        if (buf.length == 1) {
-            sb.append(buf[0]);
-        } else {
-            for (int i = 1; i < buf.length; i++) {
-                sb.append(buf[i]);
+		int idx = 1 ; 
+        for (char c : buf) {
+            if (c == '.' && idx==1 ) {
+				sb.setLength(0);
+				continue;
+            } else if (c == '.' || c == '-' || c == '_') {
+                continue;
             }
+            sb.append(c);
         }
         return sb.toString();
     }
