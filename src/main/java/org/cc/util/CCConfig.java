@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.cc.CC;
-import org.cc.CCObject;
+import org.cc.CCMap;
 import org.cc.ICCMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @author william
  */
 
-public class CCConfig extends CCObject {
+public class CCConfig extends CCMap {
     
     protected Logger log = LoggerFactory.getLogger(CCConfig.class);
 

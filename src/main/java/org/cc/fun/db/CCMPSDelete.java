@@ -14,9 +14,9 @@ import org.cc.meta.ITableMetadata;
 import org.cc.type.ICCType;
 
 /**
- *
  * @author william
  */
+
 public class CCMPSDelete  extends CCMBase<Integer> {
 
 	public Integer execute(Object... params) throws Exception {

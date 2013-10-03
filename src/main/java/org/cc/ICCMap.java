@@ -12,8 +12,8 @@ import java.util.Set;
  */
 public interface ICCMap extends ICC<String> {
     public Object[] toArray(String... names);
-    public Object attr(String id);
-    public Object attr(String id, Object dv);
 	public Map<String,Object> model();
 	public Set<String> names();
+	public Object ccpath(String query);
+	public void ccpath(String query , Object value);
 }

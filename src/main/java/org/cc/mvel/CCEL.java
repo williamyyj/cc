@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.cc.CCCast;
-import org.cc.CCObject;
+import org.cc.CCMap;
 import org.cc.ICCMap;
 import org.cc.db.DBSchema;
 import org.cc.db.IDBSchema;
@@ -218,7 +218,7 @@ public class CCEL implements ICCVM {
 		try {
 			String path = cfg.str("path_bean");
 			set_out(new File(path,alias+".java"));
-			ICCMap m = new CCObject();
+			ICCMap m = new CCMap();
 			m.set("pkg_mapper", cfg.obj("pkg_mapper"));
 			m.set("pkg_bean", cfg.obj("pkg_bean"));
 			m.set("classId",alias);
@@ -241,7 +241,7 @@ public class CCEL implements ICCVM {
 		try {
 			String path = cfg.str("path_mapper");
 			set_out(new File(path,alias+"Mapper.xml"));
-			ICCMap m = new CCObject();
+			ICCMap m = new CCMap();
 			m.set("pkg_mapper", cfg.obj("pkg_mapper"));
 			m.set("pkg_bean", cfg.obj("pkg_bean"));
 			m.set("classId",alias);

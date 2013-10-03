@@ -6,7 +6,7 @@ package org.cc.mvel;
 
 import java.io.PrintWriter;
 import java.util.Map;
-import org.cc.CCObject;
+import org.cc.CCMap;
 import org.cc.ICCMap;
 import org.cc.db.DBSchema;
 import org.cc.util.CCConfig;
@@ -27,7 +27,7 @@ public class WorkCCEL {
 		String alias = "CardApply";
 		String path = cfg.str("path_mapper");
 		el.set_out(new PrintWriter(System.out));
-		ICCMap m = new CCObject();
+		ICCMap m = new CCMap();
 		m.set("pkg_mapper", cfg.obj("pkg_mapper"));
 		m.set("pkg_bean", cfg.obj("pkg_bean"));
 		m.set("classId", alias);

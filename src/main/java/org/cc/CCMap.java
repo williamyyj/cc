@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -16,6 +18,8 @@ import java.util.Set;
 public class CCMap extends HashMap<String,Object> implements ICCMap {
 
     protected boolean isIndent = true ;
+	protected static String pattern = "\\$\\{([^\\{\\}]+)\\}";
+    protected Pattern pp = Pattern.compile(pattern);
 	
     public CCMap(){
 
@@ -42,18 +46,7 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
         }
         return new Object[]{} ;
     }
-
-    @Override
-    public Object attr(String id) {
-        return obj('@'+id);
-    }
-
-    @Override
-    public Object attr(String id, Object dv) {
-       Object o = get('@'+id);
-        return (o!=null) ? o : dv ;
-    }
-
+	
     @Override
     public String str(String id) {
         return CC.str(this, id);
@@ -212,4 +205,86 @@ public class CCMap extends HashMap<String,Object> implements ICCMap {
 	public Set<String> names() {
 		return this.keySet();
 	}
+	
+	
+	     /**
+     * { xxx:ok yyy:${xxx}/zzzz} 
+     * p(yyy) : ok/zzz
+     * @param o
+     * @return
+     */
+    public Object p(Object o) {
+        if (o instanceof String) {
+            Matcher m = pp.matcher(o.toString());
+            StringBuffer sb = new StringBuffer();
+            while (m.find()) {
+                String name = m.group(1);
+                String value = (String) this.ccpath(name);
+                if (value != null) {
+                    m.appendReplacement(sb, value.toString());
+                }
+            }
+            m.appendTail(sb);
+            return sb.toString();
+        }
+        return o;
+    }
+	
+		public Object ccpath(String query) {
+		String[] items = query.split(":");
+		Object p = this;
+		for (String key : items) {
+			if (p instanceof ICCMap) {
+				Object c = ((ICCMap) p).obj(key);
+				p = this.p(c);
+			} else if (p instanceof ICCList) {
+				int idx = cast_int(key,-1);
+				if (idx < 0) {
+					return null;
+				}
+				Object c = ((CCList) p).get(idx);
+				p = c;
+			} else {
+				return null;
+			}
+		}
+		return p;
+	}
+		
+	public int cast_int(Object v, int dv){
+		if(v instanceof Number){
+			return ((Number)v).intValue();
+		} else if (v instanceof String){
+			String text = (String) v ;
+			return Integer.parseInt(text);
+		}
+		return dv;
+	}
+	
+	 /**
+     * smart set  ccpath value s("abc:def",10) ---> {abc: { def : 10 }}
+     *
+     * @param key
+     * @param value
+     */
+    public void ccpath(String key, Object value) {
+        String[] items = key.split(":");
+        if (items.length == 1) {
+            put(items[0], value);
+        }
+        ICCMap p = this;
+        int len = items.length - 1;
+        for (int i = 0; i < len; i++) {
+            ICCMap c = p.map(items[i]);
+            //System.out.println(items[i] + ":" + c);
+            if (c == null) {
+                c = new CCMap();
+                p.set(items[i], c);
+            }
+            p = c;
+        }
+        p.set(items[len], value);
+    }
+
+	
 }
