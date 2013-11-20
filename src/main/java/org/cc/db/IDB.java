@@ -15,9 +15,9 @@ import org.cc.meta.ITableMetadata;
 import org.cc.type.CCTypes;
 
 /**
- *
  * @author william
  */
+
 public interface IDB {
 	
 	public final static String act_add = "add" ; 

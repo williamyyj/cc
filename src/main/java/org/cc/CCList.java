@@ -1,10 +1,14 @@
 package org.cc;
 
+import org.cc.CC;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import org.cc.ICC;
+import org.cc.ICCList;
+import org.cc.ICCMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -121,7 +125,7 @@ public class CCList extends ArrayList<Object> implements ICCList {
         sb.append('[');
 
         for (Object item : this) {
-            sb.append(CC.json(item));
+            sb.append(CC.json(item)).append(",");
         }
         if (size() > 0) {
             sb.setLength(sb.length() - 1);

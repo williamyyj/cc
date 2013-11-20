@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author william
+ * 只能取到值不能變更值
  */
 
 public class CCConfig extends CCMap {
@@ -23,18 +23,22 @@ public class CCConfig extends CCMap {
     public CCConfig() {
         this(null);
     }
-
-    
-    public CCConfig(String dv) {
-        super();
-        base(dv); // setting base
-        init();
+	
+	public CCConfig(String dv) {
+        this(dv,"cfg.json");  // $base/cfg.json		
     }
 
-    protected void init(){
-		File cfg_path = new File(base(),"cfg.json");
+    // $base/file_name 
+    public CCConfig(String dv, String file_name) {
+        super();
+        base(dv); // setting base
+        init(file_name);
+    }
+
+    protected void init(String file_name){
+		File cfg_path = new File(base(),file_name);
 		log.debug("===== cfg_path : "+cfg_path);
-        ICCMap m = new  CCJsonParser( cfg_path,"UTF-8").parser_obj();
+        ICCMap m = new  CCJSONParser( cfg_path,"UTF-8").parser_obj();
         if(m instanceof Map){
           this.putAll((Map<? extends String,?>) m);
         }
@@ -70,6 +74,12 @@ public class CCConfig extends CCMap {
         }
     }
 
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
+	@Override
     public ICCMap map(String id){
         if(has(id)){
             Object o = get(id);

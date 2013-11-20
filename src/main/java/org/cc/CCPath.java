@@ -4,6 +4,9 @@
  */
 package org.cc;
 
+import org.cc.ICCList;
+import org.cc.ICCMap;
+
 /**
  * @author william
  * 取得CC物件的值

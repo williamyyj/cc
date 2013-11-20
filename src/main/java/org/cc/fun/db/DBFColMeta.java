@@ -4,6 +4,9 @@
  */
 package org.cc.fun.db;
 
+import org.cc.CC;
+import org.cc.CCList;
+import org.cc.CCMap;
 import org.cc.*;
 import org.cc.db.IDBSchema;
 import java.sql.DatabaseMetaData;

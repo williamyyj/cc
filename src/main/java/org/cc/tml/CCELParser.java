@@ -3,7 +3,7 @@ package org.cc.tml;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.cc.util.CCJsonParser;
+import org.cc.util.CCJSONParser;
 
 
 
@@ -14,7 +14,7 @@ import org.cc.util.CCJsonParser;
  *
  * 改用
  */
-public class CCELParser extends CCJsonParser  {
+public class CCELParser extends CCJSONParser  {
 
 	//private String tag_import = IXOELAST.el_prefix+"import"+IXOELAST.el_suffix;
 	protected ICCEL[] RS = new ICCEL[1024];

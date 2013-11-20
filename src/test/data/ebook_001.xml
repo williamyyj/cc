@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="BIG5"?>
+<record insertDate="2012/08/13">
+	<leader>00000pmm a2200000Ii 4500</leader>
+	<controlfield tag="FMT" id="1">TE</controlfield>
+	<controlfield tag="001" id="2">10192</controlfield>
+	<controlfield tag="007" id="3">cr cn ---auuuu</controlfield>
+	<controlfield tag="008" id="4">110919s2011    ch     mo  d        chi d</controlfield>
+	<datafield id="5" tag="016" ind1="7" ind2=" ">
+		<subfield id="6" code="2">ChTaNC</subfield>
+	</datafield>
+	<datafield id="7" tag="020" ind1=" " ind2=" ">
+		<subfield id="8" code="a">9789860843040 (PDF) :</subfield>
+		<subfield id="9" code="c">NT$160</subfield>
+	</datafield>
+	<datafield id="10" tag="029" ind1="1" ind2=" ">
+		<subfield id="11" code="a">EPS</subfield>
+		<subfield id="12" code="b">10192</subfield>
+	</datafield>
+	<datafield id="13" tag="040" ind1=" " ind2=" ">
+		<subfield id="14" code="a">CYT</subfield>
+		<subfield id="15" code="b">chi</subfield>
+		<subfield id="16" code="c">CYT</subfield>
+		<subfield id="17" code="d">CYT</subfield>
+	</datafield>
+	<datafield id="19" tag="066" ind1=" " ind2=" ">
+		<subfield id="20" code="c">$1</subfield>
+	</datafield>
+	<datafield id="21" tag="084" ind1=" " ind2=" ">
+		<subfield id="22" code="a">893</subfield>
+		<subfield id="23" code="b">8745</subfield>
+		<subfield id="24" code="2">ncsclt</subfield>
+	</datafield>
+	<datafield id="25" tag="245" ind1="1" ind2="0">
+		<subfield id="26" code="a">惡魔的工作</subfield>
+		<subfield id="27" code="h">[電子資源]</subfield>
+		<subfield id="28" code="b">= 史上最強力有效的時尚雜誌編輯養成指南 //</subfield>
+		<subfield id="29" code="c">林青樺著</subfield>
+	</datafield>
+	<datafield id="30" tag="246" ind1="1" ind2="3">
+		<subfield id="31" code="a">史上最強力有效的時尚雜誌編輯養成指南 /</subfield>
+	</datafield>
+	<datafield id="32" tag="250" ind1=" " ind2=" ">
+		<subfield id="33" code="a">初版</subfield>
+	</datafield>
+	<datafield id="34" tag="260" ind1=" " ind2=" ">
+		<subfield id="35" code="a">臺北市  :</subfield>
+		<subfield id="36" code="b">聯合文學出版社公司,</subfield>
+		<subfield id="37" code="c">2011.09.01</subfield>
+	</datafield>
+	<datafield id="38" tag="300" ind1=" " ind2=" ">
+		<subfield id="39" code="a">13 MB :</subfield>
+		<subfield id="40" code="b">2D</subfield>
+	</datafield>
+	<datafield id="41" tag="490" ind1="0" ind2=" ">
+		<subfield id="42" code="a">繽紛 ;</subfield>
+		<subfield id="43" code="v">154</subfield>
+	</datafield>
+	<datafield id="44" tag="500" ind1=" " ind2=" ">
+		<subfield id="45" code="a">正題名取自題名畫面</subfield>
+	</datafield>
+	<datafield id="46" tag="508" ind1=" " ind2=" ">
+		<subfield id="47" code="a">聯合線上股份有限公司</subfield>
+	</datafield>
+	<datafield id="48" tag="516" ind1=" " ind2=" ">
+		<subfield id="49" code="a">電子書</subfield>
+	</datafield>
+	<datafield id="50" tag="521" ind1=" " ind2=" ">
+		<subfield id="51" code="a">成人(一般性)</subfield>
+	</datafield>
+	<datafield id="52" tag="530" ind1=" " ind2=" ">
+		<subfield id="53" code="a">另發行紙本: 惡魔的工作. -- . -- . --</subfield>
+	</datafield>
+	<datafield id="54" tag="538" ind1=" " ind2=" ">
+		<subfield id="55" code="a">電子書版本系統需求: 檔案格式: PDF ; 系統平臺: Windows OS ; 使用載體: PC ; 軟體需求: PDF Reader</subfield>
+	</datafield>
+	<datafield id="56" tag="653" ind1="0" ind2=" ">
+		<subfield id="57" code="a">職場</subfield>
+	</datafield>
+	<datafield id="58" tag="653" ind1="0" ind2=" ">
+		<subfield id="59" code="a">時尚</subfield>
+	</datafield>
+	<datafield id="60" tag="653" ind1="0" ind2=" ">
+		<subfield id="61" code="a">編輯</subfield>
+	</datafield>
+	<datafield id="62" tag="653" ind1="0" ind2=" ">
+		<subfield id="63" code="a">雜誌</subfield>
+	</datafield>
+	<datafield id="64" tag="776" ind1=" " ind2=" ">
+		<subfield id="65" code="z">9789575229368</subfield>
+		<subfield id="66" code="t">惡魔的工作</subfield>
+	</datafield>
+	<datafield id="67" tag="856" ind1="4" ind2=" ">
+		<subfield id="68" code="u">http://reading.udn.com</subfield>
+		<subfield id="69" code="z">UDN數位閱讀網</subfield>
+	</datafield>
+	<datafield id="70" tag="856" ind1="4" ind2=" ">
+		<subfield id="71" code="u">http://ebook.ncl.edu.tw/webpac/bookDetail.jsp?id=10192</subfield>
+		<subfield id="72" code="z">數位平臺</subfield>
+	</datafield>
+	<datafield id="73" tag="SOU" ind1=" " ind2="0">
+		<subfield id="74" code="a">tw</subfield>
+		<subfield id="75" code="b">國圖</subfield>
+		<subfield id="76" code="c">20120813</subfield>
+		<subfield id="77" code="g">CCR</subfield>
+	</datafield>
+	<datafield id="78" tag="SOU" ind1=" " ind2="1">
+		<subfield id="79" code="a">tw</subfield>
+		<subfield id="80" code="b">國圖</subfield>
+		<subfield id="81" code="c">20120813</subfield>
+		<subfield id="82" code="g">CCR</subfield>
+	</datafield>
+</record>

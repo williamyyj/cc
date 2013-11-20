@@ -7,6 +7,7 @@ package org.cc;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import org.cc.ICC;
 import org.cc.type.ICCType;
 import org.cc.type.CCBoolType;
 import org.cc.type.CCDateType;

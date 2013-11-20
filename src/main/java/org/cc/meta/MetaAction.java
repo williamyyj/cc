@@ -5,7 +5,7 @@
 package org.cc.meta;
 
 import java.io.File;
-import org.cc.CCCache;
+import org.cc.util.CCCache;
 import org.cc.ICCMap;
 import org.cc.util.CCConfig;
 
