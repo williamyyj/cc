@@ -13,7 +13,7 @@ import java.util.Date;
 public class CCJsonParser extends CCBuffer {
 
     //<$xxxx> (:. )
-    // <$render x model $>	
+    // <$render x model $>        
     private static final long serialVersionUID = 8384119638487566762L;
     public final static String tk_op_start = "<$";
     public final static String tk_op_end = "$>";

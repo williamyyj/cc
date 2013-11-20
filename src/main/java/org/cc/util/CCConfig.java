@@ -38,7 +38,7 @@ public class CCConfig extends CCMap {
     protected void init(String file_name){
 		File cfg_path = new File(base(),file_name);
 		log.debug("===== cfg_path : "+cfg_path);
-        ICCMap m = new  CCJSONParser( cfg_path,"UTF-8").parser_obj();
+        ICCMap m = new  CCJsonParser( cfg_path,"UTF-8").parser_obj();
         if(m instanceof Map){
           this.putAll((Map<? extends String,?>) m);
         }

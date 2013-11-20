@@ -1,6 +1,6 @@
 package org.cc.util;
 
-import org.cc.util.CCJSONParser;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
@@ -55,7 +55,7 @@ public class CCCache {
         CCCacheItem<ICCMap> item = new  CCCacheItem<ICCMap>();
         try {
             item.id = f.getCanonicalPath();
-            item.value = new CCJSONParser(f,enc).parser_obj();
+            item.value = new CCJsonParser(f,enc).parser_obj();
             item.lastModified = System.currentTimeMillis();		
             cache().put(item.id,item);
             return item.value;
