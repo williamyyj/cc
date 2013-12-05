@@ -7,17 +7,8 @@
 package org.cc.util;
 
 import java.io.File;
-import java.io.Reader;
-import java.net.URL;
 import org.cc.XMLObject;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.InputSource;
 
 /**
  *
