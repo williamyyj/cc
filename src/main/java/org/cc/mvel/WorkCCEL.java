@@ -32,7 +32,7 @@ public class WorkCCEL {
 		m.set("pkg_bean", cfg.obj("pkg_bean"));
 		m.set("classId", alias);
 		ICCMap meta = dm.tb_meta(table).model();
-		System.out.println(meta.json());
+		System.out.println(meta.toString());
 		m.set("meta", meta);
 		m.set("$cr", "\r\n");
 		el.exec("my/mapper", (Map) m);

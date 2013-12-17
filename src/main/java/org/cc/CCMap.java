@@ -114,7 +114,7 @@ public class CCMap extends HashMap<String, Object> implements ICCMap {
 	}
 
 	@Override
-	public String json() {
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append('{');
 		Set<Map.Entry<String, Object>> es = this.entrySet();
@@ -129,13 +129,13 @@ public class CCMap extends HashMap<String, Object> implements ICCMap {
 	}
 
 	@Override
-	public String json(String indent) {
-		return json(null, indent);
+	public String toString(String indent) {
+		return toString(null, indent);
 	}
 
-	public String json(String base, String indent) {
+	public String toString(String base, String indent) {
 		if (!isIndent) {
-			return json();
+			return toString();
 		}
 		StringBuilder sb = new StringBuilder();
 		String next = (base != null) ? base + indent : indent;

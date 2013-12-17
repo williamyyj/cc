@@ -65,7 +65,7 @@ public class DBTableMetadata implements ITableMetadata {
 
 	@Override
 	public String toString() {
-		return (this.tb_meta != null) ? tb_meta.json("\t") : super.toString();
+		return (this.tb_meta != null) ? tb_meta.toString("\t") : super.toString();
 	}
 
 	public String catalog() {

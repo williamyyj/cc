@@ -31,7 +31,7 @@ public class CCMPSDelete  extends CCMBase<Integer> {
 		ITableMetadata tbmd = db.tb_meta(tableId);
 		String sql = prepare_sql(tbmd, row);
 		log.debug("===== sql : " + sql);
-		log.debug("===== row : " + row.json());
+		log.debug("===== row : " + row.toString());
 		PreparedStatement ps = db.connection().prepareStatement(sql.toString());
 		int ret = -1;
 		try {

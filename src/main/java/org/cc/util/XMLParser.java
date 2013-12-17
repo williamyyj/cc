@@ -153,7 +153,7 @@ public class XMLParser {
     public static void main(String[] args) throws Exception{
         XMLParser p = new XMLParser();
         XMLObject xml = p.parse(new File("resources/sod/test/ebook_001.xml"),"BIG5");
-        System.out.println(xml.json("\t"));
+        System.out.println(xml.toString("\t"));
     }
 
 }

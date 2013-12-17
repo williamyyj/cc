@@ -47,11 +47,9 @@ public interface ICC<E> {
 
   public void del(E id);
 
-  public String json();
+  public String toString(String indent);
 
-  public String json(String indent);
-
-  public String json(String base, String indent);
+  public String toString(String base, String indent);
 
   public void setIsIndent(boolean isIndent);
 

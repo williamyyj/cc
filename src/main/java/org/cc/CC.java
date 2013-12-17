@@ -152,20 +152,20 @@ public class CC {
         }
 
         if (value instanceof ICC) {
-            return ((ICC) value).json();
+            return ((ICC) value).toString();
         }
 
 
         if (value instanceof Map) {
-            return new CCMap((Map) value).json();
+            return new CCMap((Map) value).toString();
         }
 
         if (value instanceof Collection) {
-            return new CCList((Collection) value).json();
+            return new CCList((Collection) value).toString();
         }
 
         if (value.getClass().isArray()) {
-            return new CCList(value).json();
+            return new CCList(value).toString();
         }
 
         return quote(value.toString());
@@ -192,20 +192,20 @@ public class CC {
         }
 
         if (value instanceof ICC) {
-            return ((ICC) value).json(base,indent);
+            return ((ICC) value).toString(base,indent);
         }
 
 
         if (value instanceof Map) {
-            return new CCMap((Map) value).json(base,indent);
+            return new CCMap((Map) value).toString(base,indent);
         }
 
         if (value instanceof Collection) {
-            return new CCList((Collection) value).json(base,indent);
+            return new CCList((Collection) value).toString(base,indent);
         }
 
         if (value.getClass().isArray()) {
-            return new CCList(value).json(base,indent);
+            return new CCList(value).toString(base,indent);
         }
 
         return quote(value.toString());
@@ -239,7 +239,7 @@ public class CC {
         OutputStreamWriter osw = null;
         try {
             osw = new OutputStreamWriter(new FileOutputStream(f), enc);
-            osw.write(m.json("\t"));
+            osw.write(m.toString("\t"));
             osw.flush();
         } finally {
             if (osw != null) {

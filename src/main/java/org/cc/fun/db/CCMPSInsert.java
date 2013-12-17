@@ -35,7 +35,7 @@ public class CCMPSInsert extends CCMBase<Integer> {
 		sql.append(" values ");
 		proc_cols_value(sql, tbmd, row, exclude);
 		log.debug("===== sql : " + sql);
-		log.debug("===== row : " + row.json());
+		log.debug("===== row : " + row.toString());
 		PreparedStatement ps = db.connection().prepareStatement(sql.toString());
 		int ret = -1;
 		try{

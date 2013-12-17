@@ -24,7 +24,7 @@ public class XMLParserTest {
 	public void test_all() throws Exception {
         XMLParser p = new XMLParser();
         XMLObject xml = p.parse(new File("src/test/data/ebook_001.xml"),"BIG5");
-        System.out.println(xml.json("\t"));
+        System.out.println(xml.toString("\t"));
 	}
 	
 }

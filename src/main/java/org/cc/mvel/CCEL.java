@@ -223,7 +223,7 @@ public class CCEL implements ICCVM {
 			m.set("pkg_bean", cfg.obj("pkg_bean"));
 			m.set("classId",alias);
 			ICCMap meta = dm.tb_meta(table).model();
-			System.out.println(meta.json());
+			System.out.println(meta.toString());
 			m.set("meta", meta);
 			m.set("$cr", "\r\n");
 			exec("my/bean", (Map) m);

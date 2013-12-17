@@ -120,7 +120,7 @@ public class CCList extends ArrayList<Object> implements ICCList {
     }
 
     @Override
-    public String json() {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append('[');
 
@@ -135,13 +135,13 @@ public class CCList extends ArrayList<Object> implements ICCList {
     }
 
 
-    public String json(String indent) {
-        return json(null, indent);
+    public String toString(String indent) {
+        return toString(null, indent);
     }
 
-    public String json(String base, String indent) {
+    public String toString(String base, String indent) {
         if (!isIndent) {
-            return json();
+            return toString();
         }
         StringBuilder sb = new StringBuilder();
         String next = (base == null) ? indent : base + indent;
